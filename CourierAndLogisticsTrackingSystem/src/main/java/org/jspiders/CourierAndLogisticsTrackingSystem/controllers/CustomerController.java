@@ -2,22 +2,23 @@ package org.jspiders.CourierAndLogisticsTrackingSystem.controllers;
 
 import java.util.List;
 
+import org.jspiders.CourierAndLogisticsTrackingSystem.dto.CustomerDTO;
 import org.jspiders.CourierAndLogisticsTrackingSystem.dto.ResponseStructure;
 import org.jspiders.CourierAndLogisticsTrackingSystem.entities.Customer;
 import org.jspiders.CourierAndLogisticsTrackingSystem.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 @RestController
 @RequestMapping("/customer")
@@ -32,38 +33,43 @@ public class CustomerController {
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<ResponseStructure<Customer>> createCustomer(@RequestBody Customer cust){
-		return new ResponseEntity<ResponseStructure<Customer>>(customerService.createCustomerInDatabase(cust), HttpStatus.CREATED);
+	public ResponseEntity<ResponseStructure<CustomerDTO>> createCustomer(@RequestBody Customer cust){
+		return new ResponseEntity<ResponseStructure<CustomerDTO>>(customerService.createCustomerInDatabase(cust), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/")
-	public ResponseEntity<ResponseStructure<List<Customer>>> getAllCustomers(){
-		return new ResponseEntity<ResponseStructure<List<Customer>>>(customerService.getAllCustomersFromDatabase(), HttpStatus.FOUND);
+	public ResponseEntity<ResponseStructure<List<CustomerDTO>>> getAllCustomers(){
+		return new ResponseEntity<ResponseStructure<List<CustomerDTO>>>(customerService.getAllCustomersFromDatabase(), HttpStatus.FOUND);
 	}
 	
 	@GetMapping("/id/{id}")
-	public ResponseEntity<ResponseStructure<Customer>> getCustomerById(@PathVariable int id){
-		return new ResponseEntity<ResponseStructure<Customer>>(customerService.getCustomerByIdFromDatabase(id), HttpStatus.FOUND);
+	public ResponseEntity<ResponseStructure<CustomerDTO>> getCustomerById(@PathVariable int id){
+		return new ResponseEntity<ResponseStructure<CustomerDTO>>(customerService.getCustomerByIdFromDatabase(id), HttpStatus.FOUND);
 	}
 	
 	@GetMapping("/email/{email}")
-	public ResponseEntity<ResponseStructure<Customer>> getCustomerByEmail(@PathVariable String email){
-		return new ResponseEntity<ResponseStructure<Customer>>(customerService.getCustomerByEmailFromDatabase(email), HttpStatus.FOUND);
+	public ResponseEntity<ResponseStructure<CustomerDTO>> getCustomerByEmail(@PathVariable String email){
+		return new ResponseEntity<ResponseStructure<CustomerDTO>>(customerService.getCustomerByEmailFromDatabase(email), HttpStatus.FOUND);
 	}
 	
 	@GetMapping("/contact/{contact}")
-	public ResponseEntity<ResponseStructure<Customer>> getCustomerByContact(@PathVariable long contact){
-		return new ResponseEntity<ResponseStructure<Customer>>(customerService.getCustomerByContactFromDatabase(contact), HttpStatus.FOUND);
+	public ResponseEntity<ResponseStructure<CustomerDTO>> getCustomerByContact(@PathVariable long contact){
+		return new ResponseEntity<ResponseStructure<CustomerDTO>>(customerService.getCustomerByContactFromDatabase(contact), HttpStatus.FOUND);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<ResponseStructure<Customer>> updateCustomerDetails(@RequestBody Customer cust){
-		return new ResponseEntity<ResponseStructure<Customer>>(customerService.updateCustomerInDatabase(cust), HttpStatus.OK);
+	@PatchMapping("/update")
+	public ResponseEntity<ResponseStructure<CustomerDTO>> updateCustomerDetails(@RequestBody Customer cust){
+		return new ResponseEntity<ResponseStructure<CustomerDTO>>(customerService.updateCustomerInDatabase(cust), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseStructure<Customer>> deleteCustomerById(@PathVariable int id){
-		return new ResponseEntity<ResponseStructure<Customer>>(customerService.deleteCustomerFromDatabaseById(id), HttpStatus.OK);
+	public ResponseEntity<ResponseStructure<CustomerDTO>> deleteCustomerById(@PathVariable int id){
+		return new ResponseEntity<ResponseStructure<CustomerDTO>>(customerService.deleteCustomerFromDatabaseById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{pageNum}/{pageSize}/{field}")
+	public ResponseEntity<ResponseStructure<Page<CustomerDTO>>> getCustomerByPagination(@PathVariable int pageNum ,@PathVariable int pageSize ,@PathVariable String field){
+		return new ResponseEntity<ResponseStructure<Page<CustomerDTO>>>(customerService.getCustomerByPaginationAndSorting(pageNum , pageSize,field), HttpStatus.FOUND);
 	}
 	
 	

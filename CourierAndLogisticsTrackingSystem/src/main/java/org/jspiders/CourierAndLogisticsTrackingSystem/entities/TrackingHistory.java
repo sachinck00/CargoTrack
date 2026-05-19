@@ -27,7 +27,7 @@ public class TrackingHistory {
 	private TrackingStatusType trackingStatus;
 	
 	@ManyToOne
-	@JoinColumn(name = "shipment_id",nullable = true)
+	@JoinColumn(name = "shipment_id", nullable = true)
     @JsonIgnore
 	private Shipment shipment;
 	

@@ -4,13 +4,16 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class WareHouse {
@@ -22,7 +25,7 @@ public class WareHouse {
 
 	private String location;
 
-	private int capacity;
+	private Integer capacity;
 
 	@Column(unique = true)
 	private long contact;
@@ -30,6 +33,26 @@ public class WareHouse {
 	@OneToMany(mappedBy = "wareHouse")
 	@JsonIgnore
 	private List<Shipment> shipments;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "warehouse_manager_id")
+	private UserCredentials userCredentials;
+
+	public UserCredentials getUserCredentials() {
+		return userCredentials;
+	}
+
+	public void setUserCredentials(UserCredentials userCredentials) {
+		this.userCredentials = userCredentials;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public void setContact(long contact) {
+		this.contact = contact;
+	}
 
 	public List<Shipment> getShipments() {
 		return shipments;

@@ -1,0 +1,22 @@
+.metadata/
+.project
+.classpath
+.settings/
+target/
+*.log
+# Eclipse / workspace files
+.metadata/
+.settings/
+.project
+.classpath
+
+# Maven
+target/
+
+# Logs
+*.log
+
+# OS / IDE
+*.tmp
+*.bak
+.DS_Store

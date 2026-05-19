@@ -36,6 +36,25 @@ public class Shipment {
 	
 	private String destination;
 	
+	private int distance;
+	
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	public void setTrackingNumber(int trackingNumber) {
+		this.trackingNumber = trackingNumber;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
 	private double weight;
 	
 	@CreationTimestamp

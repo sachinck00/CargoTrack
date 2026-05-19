@@ -3,13 +3,12 @@ package org.jspiders.CourierAndLogisticsTrackingSystem.dto;
 import java.time.LocalDate;
 
 public class ShipmentDTO {
-	private Integer shipmentId;
+	private Integer id;
 	
 	private String source;
 	
 	private String destination;
-	
-	private double weight;
+
 		
 	private LocalDate deliveryDate;
 	
@@ -24,12 +23,13 @@ public class ShipmentDTO {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public Integer getShipmentId() {
-		return shipmentId;
+	public Integer getId() {
+		return id;
 	}
-	public void setShipmentId(Integer shipmentId) {
-		this.shipmentId = shipmentId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
+	
 	
 	public String getSource() {
 		return source;
@@ -43,13 +43,7 @@ public class ShipmentDTO {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	public double getWeight() {
-		return weight;
-	}
-	public void setWeight(double weight) {
-		this.weight = weight;
-	}
-
+	
 	public LocalDate getDeliveryDate() {
 		return deliveryDate;
 	}

@@ -4,5 +4,6 @@ public enum TrackingStatusType {
 	CREATED,
     IN_WAREHOUSE,
     OUT_FOR_DELIVERY,
-    DELIVERED
+    DELIVERED,
+    CANCELLED
 }

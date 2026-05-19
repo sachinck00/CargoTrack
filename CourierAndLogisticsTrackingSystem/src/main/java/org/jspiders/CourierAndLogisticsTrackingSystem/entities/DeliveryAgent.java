@@ -10,7 +10,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class DeliveryAgent {
@@ -33,6 +35,22 @@ public class DeliveryAgent {
 	@OneToMany(mappedBy="deliveryAgent")
 	@JsonIgnore
 	private List<Shipment> shipment;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="delivery_agent_id")
+	private UserCredentials userCredentials;
+
+	public UserCredentials getUserCredentials() {
+		return userCredentials;
+	}
+
+	public void setUserCredentials(UserCredentials userCredentials) {
+		this.userCredentials = userCredentials;
+	}
+
+	public void setContact(long contact) {
+		this.contact = contact;
+	}
 
 	public List<Shipment> getShipment() {
 		return shipment;

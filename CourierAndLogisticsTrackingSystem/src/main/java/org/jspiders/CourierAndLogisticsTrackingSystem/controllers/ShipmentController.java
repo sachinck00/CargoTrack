@@ -8,6 +8,7 @@ import org.jspiders.CourierAndLogisticsTrackingSystem.dto.ShipmentDTO;
 import org.jspiders.CourierAndLogisticsTrackingSystem.entities.Shipment;
 import org.jspiders.CourierAndLogisticsTrackingSystem.services.ShipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -88,6 +89,11 @@ public class ShipmentController {
 	@GetMapping("/shipmentsByDeliveryDate/{date}")
 	public ResponseEntity<ResponseStructure<List<ShipmentDTO>>> getShipmentsByDeliveryDate(@PathVariable LocalDate date){
 		return new ResponseEntity<ResponseStructure<List<ShipmentDTO>>>(shipmentService.getShipmentsByDeliveryDateFromDatabase(date),HttpStatus.FOUND);
+	}
+	
+	@GetMapping("/{pn}/{ps}/{field}")
+	public ResponseEntity<ResponseStructure<Page<ShipmentDTO>>> getShipmentsByPagination(@PathVariable int pn , @PathVariable int ps , @PathVariable String field){
+		return new ResponseEntity<ResponseStructure<Page<ShipmentDTO>>>(shipmentService.getShipmentsByPaginationAndSorting(pn , ps , field),HttpStatus.FOUND);
 	}
 	
 }

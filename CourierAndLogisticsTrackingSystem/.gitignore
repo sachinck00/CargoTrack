@@ -1,3 +1,14 @@
+.gitignore
+pom.xml
+target
+
+.metadata/
+.project
+.classpath
+.settings/
+target/
+*.log
+
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
